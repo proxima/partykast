@@ -209,7 +209,7 @@ function get_songs(id) {
 function display_playlists(data) {
 	$("#playlist_seclections").append(escapeHTML(data));
 	var ret = parse_user_playlists(data);
-	var url = "http://www.soulkast.com/party/index.html?playlist_id=";
+	var url = "http://www.botchris.com/party/index.html?playlist_id=";
 	$("#playlist_selections").show();
 	for(var i = 0;i < ret.length; i++)
 	{
@@ -267,12 +267,6 @@ $(document).ready(function() {
     show_control();
     */
 
-
-
-
-
-
-    //var devkey = "AI39si6z4PYzM1Iqqdx18WB_zFj0Q-LnPamwTtK62Sf5lLfojt4QGGbZ41tH6VTU4uiVKTfn7LukuKFMtxRnU3LAo-b16oam-g";
     $("#search_input").autocomplete({
         source: function(request, response) {
             $.ajax({
@@ -441,7 +435,7 @@ $(document).ready(function() {
 
     //login shit
     $("#login_button").click(function() {
-        window.location.href = "http://www.youtube.com/auth_sub_request?scope=http://gdata.youtube.com&session=1&next=http://www.soulkast.com/party/index.html&secure=0";
+        window.location.href = "http://www.youtube.com/auth_sub_request?scope=http://gdata.youtube.com&session=1&next=http://www.botchris.com/partykast/index.html&secure=0";
     });
 
     //alert(gup('playlist_id', document.location.href));
