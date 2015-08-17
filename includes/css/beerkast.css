@@ -7,16 +7,15 @@ width: 100%;
 #left_player, #right_player
 {
     position:absolute;
-    width:760px;
-    height:570px;
+    width:1890px;
+    height:1000px;
     background-color:White;
     padding-left:15px;
     padding-right:15px;
     padding-top:15px;
     padding-bottom:15px;
-    top:105px;
-    left:440px;   
-
+    top:130px;
+    left:100px;   
 }
 #left_player
 {
@@ -124,8 +123,8 @@ html
 	width: 330px;
  	position :absolute;
  	padding:10px;
- 	top:10px;
- 	left:880px;
+ 	top:30px;
+ 	left:1670px;
 }
 #logo
 {
@@ -134,8 +133,8 @@ html
 	width: 410px;
  	position :absolute;
  	padding:9px;
- 	top:10px;
- 	left:442px;
+ 	top:30px;
+ 	left:100px;
  	text-align:center;
 }
 
