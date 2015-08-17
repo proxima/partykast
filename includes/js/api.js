@@ -58,32 +58,35 @@ function getAuthToken() {
 function parse_song_results(data) {
   var ret = new Array();
 
-  eval(data);
-
-  var total_songs = data.feed.openSearch$totalResults;
+  console.log(data); 
+  var num_songs = data.items.length;
 
   var begin = 0;
-  var end = data.feed.openSearch$itemsPerPage.$t;
+  var end = num_songs;
 
   var location = 0;
 
   for(var i = begin; i < end; ++i) {
-
     try {
-      var update_id = eval('data.feed.entry['+i+'].id.$t');
-      var title = eval('data.feed.entry['+i+'].media$group.media$title.$t');
-      var url = eval('data.feed.entry['+i+'].media$group.media$player[0].url');
-      var duration = eval('data.feed.entry['+i+'].media$group.yt$duration.seconds');
-      var thumbnail = eval('data.feed.entry['+i+'].media$group.media$thumbnail[0].url');
+//    var location = data.items[i].snippet.position;	  
+//    var update_id = eval('data.feed.entry['+i+'].id.$t');
+      var title = data.items[i].snippet.title;
+//    var url = eval('data.feed.entry['+i+'].media$group.media$player[0].url');
+//    var duration = eval('data.feed.entry['+i+'].media$group.yt$duration.seconds');
+      var duration = 120;
+      var thumbnail = data.items[i].snippet.thumbnails.default.url;
+      var id = data.items[i].contentDetails.videoId;
+      var update_id = '/' + id;
 
       if(parseInt(duration) >= 60) {
         ret[location] = new Array();
         ret[location]["title"] = title;
-        ret[location]["url"] = url;
+        //ret[location]["url"] = url;
         ret[location]["duration"] = duration;
         ret[location]["thumbnail"] = thumbnail;
-        ret[location]["id"] = gup('v', url);
-        ret[location]["update_id"] = update_id.substring(update_id.lastIndexOf('/')+1);
+        ret[location]["id"] = id;
+        //ret[location]["id"] = gup('v', url);
+        //ret[location]["update_id"] = update_id.substring(update_id.lastIndexOf('/')+1);
         ++location;
       }
     } catch(e) {
@@ -94,7 +97,7 @@ function parse_song_results(data) {
 
 function search(searchString, callback) {
   searchString = escape(searchString);
-  $.getJSON("http://gdata.youtube.com/feeds/api/videos?q=" + searchString + "&format=5&key=" + devkey + "&alt=json&callback=?", callback);
+  $.getJSON("http://gdata.youtube.com/feeds/api/videos?v=2&q=" + searchString + "&format=5&key=" + devkey + "&alt=json&callback=?", callback);
 }
 
 function parse_user_playlists(data) {
@@ -126,13 +129,18 @@ function get_user_playlists(callback) {
 var external_songs_callback;
 var returned_song_datas;
 
-function local_playlist_songs_callback(data) {
+function local_playlist_songs_callback(playlistID, data) {
   returned_song_datas[returned_song_datas.length] = data;
 
-  if(returned_song_datas.length == 4) {
+  var token = data["nextPageToken"];
+  if(token != null) {
+    $.getJSON("https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails%2Csnippet&pageToken=" + token + "&maxResults=50&playlistId=" + playlistID + "&fields=items%2CnextPageToken&key=" + devkey, function(inner_data) {
+      local_playlist_songs_callback(playlistID, inner_data);
+    });
+  } else {
     var ret = new Array();
 
-    for(var i = 0; i < 4; ++i) {
+    for(var i = 0; i < returned_song_datas.length; ++i) {
       var parsed_results = parse_song_results(returned_song_datas[i]);
       ret = ret.concat(parsed_results);
     }
@@ -145,10 +153,9 @@ function get_playlist_songs(playlistID, callback) {
   external_songs_callback = callback;
   returned_song_datas = new Array();  
 
-  var max_results = 50;
-  for(var i = 1; i < 200; i += 50) {
-    $.getJSON("http://gdata.youtube.com/feeds/api/playlists/" + playlistID + "?start-index=" + i + "&max-results=" + max_results + "&format=5&alt=json&callback=?", local_playlist_songs_callback);
-  }
+  $.getJSON("https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=50&playlistId=" + playlistID + "&fields=items%2CnextPageToken&key=" + devkey, function(data) {
+    local_playlist_songs_callback(playlistID, data);
+  });
 }
 
 function delete_song_from_playlist(playlistID, updateID, callback) {
