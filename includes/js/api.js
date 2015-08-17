@@ -2,6 +2,23 @@ var devkey = "INSERT_DEV_KEY_HERE";
 var domain = "http://www.botchris.com/";
 var session_token = "";
 
+var start_hash = new Object();
+
+function get_start_time(video_id) {
+  var start_time = 30;
+  try {
+    if(start_hash[video_id] != null) {
+      start_time = start_hash[video_id];
+    }
+  } catch(e) {
+  }
+  return start_time;
+}
+
+function sast(player, video_id) {
+  player.cueVideoById(video_id, get_start_time(video_id));
+}
+
 function gup(name, myString) {
   name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
   var regexS = "[\\?&]"+name+"=([^&#]*)";
