@@ -112,12 +112,12 @@ function song_callback(data) {
                 var id = $(".pl_title[index='" + (parseInt(index) + 1) + "']").attr('id');
                 $("#cur_playing").val(index);
                 if (currentPlayer == 0) {
-                    rightplayer.cueVideoById(id, 30);
+                    sast(rightplayer, id);
                     rightplayer.playVideo();
                     rightplayer.pauseVideo();
                 }
                 else {
-                    leftplayer.cueVideoById(id, 30);
+                    sast(leftplayer, id);
                     leftplayer.playVideo();
                     leftplayer.pauseVideo();
                 }
@@ -126,12 +126,12 @@ function song_callback(data) {
 
             if ((index - 1) == $("#cur_playing").val()) {
                 if (currentPlayer == 0) {
-                    rightplayer.cueVideoById(id, 30);
+                    sast(rightplayer, id);
                     rightplayer.playVideo();
                     rightplayer.pauseVideo();
                 }
                 else {
-                    leftplayer.cueVideoById(id, 30);
+                    sast(leftplayer, id);
                     leftplayer.playVideo();
                     leftplayer.pauseVideo();
                 }
@@ -148,12 +148,12 @@ function song_callback(data) {
         if ((index - 1) == $("#cur_playing").val()) {
             var new_id = $(".pl_title[index='" + (parseInt(index) + 1) + "']").attr('id');
             if (currentPlayer == 0) {
-                rightplayer.cueVideoById(new_id, 30);
+                sast(rightplayer, new_id);
                 rightplayer.playVideo();
                 rightplayer.pauseVideo();
             }
             else {
-                leftplayer.cueVideoById(new_id, 30);
+                sast(leftplayer, new_id);
                 leftplayer.playVideo();
                 leftplayer.pauseVideo();
             }
@@ -209,7 +209,7 @@ function get_songs(id) {
 function display_playlists(data) {
 	$("#playlist_seclections").append(escapeHTML(data));
 	var ret = parse_user_playlists(data);
-	var url = "http://www.botchris.com/party/index.html?playlist_id=";
+	var url = "http://www.soulkast.com/party/index.html?playlist_id=";
 	$("#playlist_selections").show();
 	for(var i = 0;i < ret.length; i++)
 	{
@@ -234,7 +234,7 @@ $(document).ready(function() {
     $(".selector").bind("slide", function(event, ui) { });
 
     //init current volume to slider
-    $("#volume_slider").slider("value", 75);
+    $("#volume_slider").slider("value", 100);
 
     //corner boxes
     $("#logo").corner();
@@ -267,6 +267,12 @@ $(document).ready(function() {
     show_control();
     */
 
+
+
+
+
+
+    //var devkey = "AI39si6z4PYzM1Iqqdx18WB_zFj0Q-LnPamwTtK62Sf5lLfojt4QGGbZ41tH6VTU4uiVKTfn7LukuKFMtxRnU3LAo-b16oam-g";
     $("#search_input").autocomplete({
         source: function(request, response) {
             $.ajax({
@@ -321,13 +327,13 @@ $(document).ready(function() {
             });
             if (currentPlayer == 0) {
                 //alert("rightplayer queue");
-                rightplayer.cueVideoById(id, 30);
+                sast(rightplayer, id);
                 rightplayer.playVideo();
                 rightplayer.pauseVideo();
             }
             else {
                 //alert("leftplayer queue");
-                leftplayer.cueVideoById(id, 30);
+                sast(leftplayer, id);
                 leftplayer.playVideo();
                 leftplayer.pauseVideo();
             }
@@ -350,12 +356,12 @@ $(document).ready(function() {
                         var id = $(".pl_title[index='" + (parseInt(index) + 1) + "']").attr('id');
                         $("#cur_playing").val(index);
                         if (currentPlayer == 0) {
-                            rightplayer.cueVideoById(id, 30);
+                            sast(rightplayer, id);
                             rightplayer.playVideo();
                             rightplayer.pauseVideo();
                         }
                         else {
-                            leftplayer.cueVideoById(id, 30);
+                            sast(leftplayer, id);
                             leftplayer.playVideo();
                             leftplayer.pauseVideo();
                         }
@@ -364,12 +370,12 @@ $(document).ready(function() {
 
                     if ((index - 1) == $("#cur_playing").val()) {
                         if (currentPlayer == 0) {
-                            rightplayer.cueVideoById(id, 30);
+                            sast(rightplayer, id);
                             rightplayer.playVideo();
                             rightplayer.pauseVideo();
                         }
                         else {
-                            leftplayer.cueVideoById(id, 30);
+                            sast(leftplayer, id);
                             leftplayer.playVideo();
                             leftplayer.pauseVideo();
                         }
@@ -386,12 +392,12 @@ $(document).ready(function() {
         if ((index - 1) == $("#cur_playing").val()) {
             var new_id = $(".pl_title[index='" + (parseInt(index) + 1) + "']").attr('id');
             if (currentPlayer == 0) {
-                rightplayer.cueVideoById(new_id, 30);
+                sast(rightplayer, new_id);
                 rightplayer.playVideo();
                 rightplayer.pauseVideo();
             }
             else {
-                leftplayer.cueVideoById(new_id, 30);
+                sast(leftplayer, new_id);
                 leftplayer.playVideo();
                 leftplayer.pauseVideo();
             }
@@ -435,7 +441,7 @@ $(document).ready(function() {
 
     //login shit
     $("#login_button").click(function() {
-        window.location.href = "http://www.youtube.com/auth_sub_request?scope=http://gdata.youtube.com&session=1&next=http://www.botchris.com/partykast/index.html&secure=0";
+        window.location.href = "http://www.youtube.com/auth_sub_request?scope=http://gdata.youtube.com&session=1&next=http://www.soulkast.com/party/index.html&secure=0";
     });
 
     //alert(gup('playlist_id', document.location.href));
@@ -498,12 +504,12 @@ $(document).ready(function() {
                     var id = $(".pl_title[index='" + (parseInt(index) + 1) + "']").attr('id');
                     $("#cur_playing").val(index);
                     if (currentPlayer == 0) {
-                        rightplayer.cueVideoById(id, 30);
+                        sast(rightplayer, id);
                         rightplayer.playVideo();
                         rightplayer.pauseVideo();
                     }
                     else {
-                        leftplayer.cueVideoById(id, 30);
+                        sast(leftplayer, id);
                         leftplayer.playVideo();
                         leftplayer.pauseVideo();
                     }
@@ -512,12 +518,12 @@ $(document).ready(function() {
 
                 if ((index - 1) == $("#cur_playing").val()) {
                     if (currentPlayer == 0) {
-                        rightplayer.cueVideoById(id, 30);
+                        sast(rightplayer, id);
                         rightplayer.playVideo();
                         rightplayer.pauseVideo();
                     }
                     else {
-                        leftplayer.cueVideoById(id, 30);
+                        sast(leftplayer, id);
                         leftplayer.playVideo();
                         leftplayer.pauseVideo();
                     }
@@ -529,12 +535,12 @@ $(document).ready(function() {
         var index = parseInt($("#cur_playing").val());
         var id = $(".pl_title[index='" + (index + 1) + "']").attr('id');
         if (currentPlayer == 0) {
-            rightplayer.cueVideoById(id, 30);
+            sast(rightplayer, id);
             rightplayer.playVideo();
             rightplayer.pauseVideo();
         }
         else {
-            leftplayer.cueVideoById(id, 30);
+            sast(leftplayer, id);
             leftplayer.playVideo();
             leftplayer.pauseVideo();
         }

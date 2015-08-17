@@ -2,7 +2,7 @@ var leftplayer = 0;
 var rightplayer = 0;
 var seconds_per_song = 60;
 var update_frequency_milli = 1000;
-var default_start_location = 30;
+var default_start_location = 0;
 var currentPlayer = -1;
 
 function raise_min() {
@@ -96,11 +96,13 @@ function play() {
     
     var played_so_far;
 
+    var current_song_id = $(".pl_title[index='" + parseInt($("#cur_playing").val()) + "']").attr("id");
+
     if (currentPlayer == 0) {
-        played_so_far = leftplayer.getCurrentTime() - default_start_location;
+        played_so_far = leftplayer.getCurrentTime() - get_start_time(current_song_id);
     }
     else {
-        played_so_far = rightplayer.getCurrentTime() - default_start_location;
+        played_so_far = rightplayer.getCurrentTime() - get_start_time(current_song_id);
     }
     
     var time = getTime(played_so_far);
@@ -124,7 +126,7 @@ function play() {
             var id1 = $(".pl_title[index='" + id1_index + "']").attr("id");
 
             hide_left();
-	leftplayer.cueVideoById(id1, 30);
+            sast(leftplayer, id1);
             	leftplayer.playVideo();
             leftplayer.pauseVideo();
             show_right();
@@ -145,7 +147,7 @@ function play() {
             var id2_index = parseInt($("#cur_playing").val()) + 2;
             var id2 = $(".pl_title[index='" + id2_index + "']").attr("id");
             hide_right();
-            	rightplayer.cueVideoById(id2, 30);
+            sast(rightplayer, id2);
             	rightplayer.playVideo();
             rightplayer.pauseVideo();
 
@@ -180,8 +182,7 @@ function onRightPlayerStateChange(newState) {
 
 function onLeftPlayerError(error_msg) {
 //	leftplayer.stopVideo();
-        leftplayer.cueVideoById("P3VgOkYgGHo", 101);
-
+        sast(leftplayer, "P3VgOkYgGHo");
         leftplayer.playVideo();
 	if(currentPlayer == 1)
 	{
@@ -194,7 +195,7 @@ function onLeftPlayerError(error_msg) {
 function onRightPlayerError(error_msg) {
 //    alert("Right player error: " + error_msg);
 //	rightplayer.stopVideo();
-        rightplayer.cueVideoById("P3VgOkYgGHo", 101);
+        sast(rightplayer, "P3VgOkYgGHo");
 //        rightplayer.playVideo();
 
 	if(currentPlayer == 0)
@@ -228,11 +229,11 @@ function onYouTubePlayerReady(playerId) {
     }
 }
 function init(id1, id2) {
-    leftplayer.setVolume(75);
-    rightplayer.setVolume(75);
-    leftplayer.cueVideoById(id1, 30);
+    leftplayer.setVolume(100);
+    rightplayer.setVolume(100);
+    sast(leftplayer, id1);
     leftplayer.playVideo();
-    rightplayer.cueVideoById(id2, 30);
+    sast(rightplayer, id2);
     rightplayer.playVideo();
     rightplayer.pauseVideo();
     $(".pl_title[index='0']").css("background-color", "AntiqueWhite");
