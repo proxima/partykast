@@ -1,0 +1,163 @@
+#player_window
+{
+width: 100%;
+    
+}
+
+#left_player, #right_player
+{
+    position:absolute;
+    width:760px;
+    height:570px;
+    background-color:White;
+    padding-left:15px;
+    padding-right:15px;
+    padding-top:15px;
+    padding-bottom:15px;
+    top:105px;
+    left:440px;   
+
+}
+#left_player
+{
+    z-index:100;     
+}
+.delete_img
+{
+    text-decoration:none;
+    border:0px;
+}
+
+#control
+{
+	top:55px;
+	height:580px;
+	padding:10px;
+	left:10px; 
+}
+
+#control table
+{
+    font-family:Verdana;
+    font-size:10px;
+
+}
+
+#search_input
+{
+    border:0px;
+    font-family:Verdana;
+    font-size:10px;
+    color:Gray;
+    margin:5px;
+    width:240px;  
+}
+
+#volume_slider
+{
+    height:100px;
+}
+
+.control_class
+{
+    position :absolute;
+    background-color:White;
+    margin-top:50px;
+    z-index:99;    
+    width:400px;
+}
+#message
+{
+     height:15px;   
+     padding:15px;
+}
+#control2
+{
+    padding:15px;
+    width:10px;   
+    left:1240px;
+    top:55px;
+}
+#login_portlet
+{
+    padding:2px;
+    left:295px;
+    top:22px;
+    width:130px;
+    height:21px;
+    text-align:center;
+}
+
+#login_button
+{
+    height:20px;
+    font-size:10px; 
+}
+
+body {
+    background: url(/party/includes/img/wallpaper.gif);
+    width:100%;
+    
+}
+html 
+{
+    background:none;
+}
+
+.clock_s, .clock_m, .clock_h, .clock_c
+{
+    z-index:51;
+
+}
+
+#clock_container
+{
+	background-color:Black;
+	margin: 0;
+	
+}
+
+#clock_container_top
+{
+	background-color:White;
+	margin: 0;
+	width: 330px;
+ 	position :absolute;
+ 	padding:10px;
+ 	top:10px;
+ 	left:880px;
+}
+#logo
+{
+	background-color:White;
+	margin: 0;
+	width: 410px;
+ 	position :absolute;
+ 	padding:9px;
+ 	top:10px;
+ 	left:442px;
+ 	text-align:center;
+}
+
+#control3
+{
+	width:280px;   
+	height:25px;
+	top:22px;
+	left:10px;
+}
+
+
+.clock_elements
+{
+ display:none;   
+}
+
+#playlist_selections
+{
+	top:-39px;
+	left:10px;
+	height:34px;
+	width:399px;
+	padding:10px;
+}
