@@ -153,7 +153,7 @@ function get_playlist_songs(playlistID, callback) {
   external_songs_callback = callback;
   returned_song_datas = new Array();  
 
-  $.getJSON("https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=50&playlistId=" + playlistID + "&fields=items%2CnextPageToken&key=" + devkey, function(data) {
+  $.getJSON("https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails%2Csnippet&maxResults=50&playlistId=" + playlistID + "&fields=items%2CnextPageToken&key=" + devkey, function(data) {
     local_playlist_songs_callback(playlistID, data);
   });
 }
