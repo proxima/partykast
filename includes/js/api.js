@@ -1,4 +1,4 @@
-var devkey = "AIzaSyD_5IFFQKh1qh8gmpbcK0jiHh9s0j8-zpA";
+var devkey = "INSERT_DEV_KEY_HERE";
 var domain = "http://www.botchris.com/";
 var session_token = "";
 
@@ -73,7 +73,7 @@ function parse_song_results(data) {
       var title = data.items[i].snippet.title;
 //    var url = eval('data.feed.entry['+i+'].media$group.media$player[0].url');
 //    var duration = eval('data.feed.entry['+i+'].media$group.yt$duration.seconds');
-      var duration = 120;
+      var duration = Math.floor((Math.random() * 300) + 1);
       var thumbnail = data.items[i].snippet.thumbnails.default.url;
       var id = data.items[i].contentDetails.videoId;
       var update_id = '/' + id;
