@@ -1,21 +1,27 @@
 ﻿#player_window
 {
-width: 100%;
-    
+    width: 100%;  
+}
+
+#left, #right{
+    position: absolute;
+    top: 0;
+    left: -415px;
 }
 
 #left_player, #right_player
 {
     position:absolute;
-    width:1890px;
-    height:1000px;
+    width:1670px;
+    height:930px;
     background-color:White;
     padding-left:15px;
     padding-right:15px;
     padding-top:15px;
     padding-bottom:15px;
     top:130px;
-    left:100px;   
+    left:100px;
+    text-align: left;
 }
 #left_player
 {
@@ -94,8 +100,10 @@ width: 100%;
 }
 
 body {
-    background: url(/party/includes/img/wallpaper.gif);
+    background:none;
+    background-color:#000;
     width:100%;
+    padding:0px;
     
 }
 html 
@@ -118,13 +126,13 @@ html
 
 #clock_container_top
 {
-	background-color:White;
+	background-color:#000;
 	margin: 0;
 	width: 330px;
  	position :absolute;
  	padding:10px;
  	top:30px;
- 	left:1670px;
+ 	left:1480px;
 }
 #logo
 {

@@ -1,4 +1,4 @@
-var devkey = "INSERT_DEV_KEY_HERE";
+var devkey = "AIzaSyD_5IFFQKh1qh8gmpbcK0jiHh9s0j8-zpA";
 var domain = "http://www.botchris.com/";
 var session_token = "";
 
