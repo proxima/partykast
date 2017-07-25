@@ -243,21 +243,25 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 function onYouTubeIframeAPIReady() {
   leftplayer = new YT.Player('ytapiplayer1', {
     enablejsapi: 1,
-    height: '1000',
-    width: '2163',
+    playerVars: { 'controls' : 0 }, 
+    height: '930',
+    width: '1670',
     events: {
       'onReady': function() { onYouTubePlayerReady("left"); },
-      'onStateChange': onLeftPlayerStateChange
+      'onStateChange': onLeftPlayerStateChange,
+      'onError': onLeftPlayerError
     }
   });
 
   rightplayer = new YT.Player('ytapiplayer2', {
     enablejsapi: 1,
-    height: '1000',
-    width: '2163',
+    playerVars: { 'controls' : 0 }, 
+    height: '930',
+    width: '1670',
     events: {
       'onReady': function() { onYouTubePlayerReady("right"); },
-      'onStateChange': onRightPlayerStateChange
+      'onStateChange': onRightPlayerStateChange,
+      'onError': onRightPlayerError
     }
   });  
 }
