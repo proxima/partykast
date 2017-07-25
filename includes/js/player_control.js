@@ -257,7 +257,7 @@ function onYouTubeIframeAPIReady() {
     width: '2163',
     events: {
       'onReady': function() { onYouTubePlayerReady("right"); },
-      'onStateChange': onLeftPlayerStateChange
+      'onStateChange': onRightPlayerStateChange
     }
   });  
 }
