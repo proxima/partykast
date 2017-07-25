@@ -181,6 +181,7 @@ function onRightPlayerStateChange(newState) {
 }
 
 function onLeftPlayerError(error_msg) {
+  alert("Left player error: " + error_msg);
 //	leftplayer.stopVideo();
         sast(leftplayer, "P3VgOkYgGHo");
         leftplayer.playVideo();
@@ -193,7 +194,7 @@ function onLeftPlayerError(error_msg) {
 }
 
 function onRightPlayerError(error_msg) {
-//    alert("Right player error: " + error_msg);
+    alert("Right player error: " + error_msg);
 //	rightplayer.stopVideo();
         sast(rightplayer, "P3VgOkYgGHo");
 //        rightplayer.playVideo();
@@ -210,15 +211,9 @@ function onRightPlayerError(error_msg) {
 
 function onYouTubePlayerReady(playerId) {
     if (playerId == "left") {
-        leftplayer = document.getElementById("left");
-        leftplayer.addEventListener("onStateChange", "onLeftPlayerStateChange");
-        leftplayer.addEventListener("onError", "onLeftPlayerError");
         api_is_ready("left");
     }
     if (playerId == "right") {
-        rightplayer = document.getElementById("right");
-        rightplayer.addEventListener("onStateChange", "onRightPlayerStateChange");
-        rightplayer.addEventListener("onError", "onRightPlayerError");
         api_is_ready("right");
     }
     if (leftplayer != 0 && rightplayer != 0) {
@@ -237,4 +232,32 @@ function init(id1, id2) {
     rightplayer.playVideo();
     rightplayer.pauseVideo();
     $(".pl_title[index='0']").css("background-color", "AntiqueWhite");
+}
+
+var tag = document.createElement('script');
+
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+function onYouTubeIframeAPIReady() {
+  leftplayer = new YT.Player('ytapiplayer1', {
+    enablejsapi: 1,
+    height: '1000',
+    width: '2163',
+    events: {
+      'onReady': function() { onYouTubePlayerReady("left"); },
+      'onStateChange': onLeftPlayerStateChange
+    }
+  });
+
+  rightplayer = new YT.Player('ytapiplayer2', {
+    enablejsapi: 1,
+    height: '1000',
+    width: '2163',
+    events: {
+      'onReady': function() { onYouTubePlayerReady("right"); },
+      'onStateChange': onLeftPlayerStateChange
+    }
+  });  
 }
