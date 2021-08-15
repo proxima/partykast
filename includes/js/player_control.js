@@ -25,6 +25,7 @@ function raise_min() {
         $("#m01").attr("src", "includes/img/0.gif");
         $("#cur_m").val(0);
         raise_hour();
+	return;
               
     }
     else {
